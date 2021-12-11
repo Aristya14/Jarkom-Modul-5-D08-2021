@@ -293,6 +293,13 @@ Kemudian lakukan testing :
 
 ### Gambar :
 
+![1](./gambar/31.png)
+
+![2](./gambar/32.png)
+
+![3](./gambar/33.png)
+
+![4](./gambar/35.png)
 ## NOMOR 4 Akses dari subnet Blueno dan Cipher hanya diperbolehkan pada pukul 07.00 - 15.00 pada hari Senin sampai Kamis.Selain itu di reject 
 
 ***Dorki***
@@ -308,6 +315,8 @@ Lalu testing dengan ping ke arah Dorki `ping 10.25.0.2`
 
 ### Gambar :
 
+![5](./gambar/41.png)
+
 *dari Chipper*
 
 Masukkan command seperti ini :
@@ -319,6 +328,8 @@ Masukkan command seperti ini :
 Lalu testing dengan ping ke arah Dorki `ping 10.25.0.2`
 
 ### Gambar :
+
+![6](./gambar/42.png)
 
 ## NOMOR 5 Akses dari subnet Elena dan Fukuro hanya diperbolehkan pada pukul 15.01 hingga pukul 06.59 setiap harinya.Selain itu di reject
 ## NOMOR 6 Luffy ingin Guanhao disetting sehingga setiap request dari client yang mengakses DNS Server akan didistribusikan secara bergantian pada Jorge dan Maingate
