@@ -264,7 +264,7 @@ Keterangan:
 
 ## NOMOR 3 Luffy meminta untuk membatasi DHCP dan DNS Server hanya boleh menerima maksimal 3 koneksi ICMP secara bersamaan menggunakan iptables, selebihnya didrop.
 
-***Dorki & Jipangu***
+***Doriki & Jipangu***
 
 Lakukan dengan :
 
@@ -287,7 +287,7 @@ Keterangan:
 
 `-j DROP`: Paket di-drop
 
-Kemudian lakukan testing :
+**Kemudian lakukan testing :**
 1. Masukkan ke empat node berbeda
 2. ping ke arah *jipangu* dengan menggunakan `ping 10.25.0.3`
 
@@ -300,9 +300,11 @@ Kemudian lakukan testing :
 ![3](./gambar/33.png)
 
 ![4](./gambar/35.png)
+
+
 ## NOMOR 4 Akses dari subnet Blueno dan Cipher hanya diperbolehkan pada pukul 07.00 - 15.00 pada hari Senin sampai Kamis.Selain itu di reject 
 
-***Dorki***
+***Doriki***
 
 *dari Blueno*
 Masukkan command seperti ini :
@@ -330,6 +332,8 @@ Lalu testing dengan ping ke arah Dorki `ping 10.25.0.2`
 ### Gambar :
 
 ![6](./gambar/42.png)
+
+
 
 ## NOMOR 5 Akses dari subnet Elena dan Fukuro hanya diperbolehkan pada pukul 15.01 hingga pukul 06.59 setiap harinya.Selain itu di reject
 
