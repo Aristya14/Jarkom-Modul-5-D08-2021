@@ -217,7 +217,55 @@ lalu pada file `/etc/default/isc-dhcp-server` isi bagian interfaces dengan `eth0
 ## NOMOR 1 Mengkonfigurasi Foosha menggunakan iptables, tetapi Luffy tidak ingin menggunakan MASQUERADE.
 ## NOMOR 2 Mendrop semua akses HTTP dari luar Topologi kalian pada server yang memiliki ip DHCP dan DNS Server demi menjaga keamanan.
 ## NOMOR 3 Luffy meminta untuk membatasi DHCP dan DNS Server hanya boleh menerima maksimal 3 koneksi ICMP secara bersamaan menggunakan iptables, selebihnya didrop.
+
+***Dorki & Jipangu***
+
+Lakukan dengan :
+
+`iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT`
+
+dan
+
+`iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP`
+
+Kemudian lakukan testing :
+1. Masukkan ke empat node berbeda
+2. ping ke arah *jipangu* dengan menggunakan `ping 10.25.0.3`
+
+### Gambar :
+
+
 ## NOMOR 4 Akses dari subnet Blueno dan Cipher hanya diperbolehkan pada pukul 07.00 - 15.00 pada hari Senin sampai Kamis.Selain itu di reject 
+
+***Dorki***
+
+*dari Blueno*
+Masukkan command seperti ini :
+
+`iptables -A INPUT -s 10.25.0.128/25 -m time --timestart 07:00 --timestop 15:00 --weekdays `
+
+`Mon,Tue,Wed,Thu -j ACCEPT`
+
+`iptables -A INPUT -s 10.25.0.128/25 -j REJECT`
+
+Lalu testing dengan ping ke arah Dorki `ping 10.25.0.2`
+
+### Gambar :
+
+*dari Chipper*
+
+Masukkan command seperti ini :
+
+`iptables -A INPUT -s 10.25.4.0/22 -m time --timestart 07:00 --timestop 15:00 --weekdays `
+
+`Mon,Tue,Wed,Thu -j ACCEPT`
+
+`iptables -A INPUT -s 10.25.4.0/22 -j REJECT`
+
+Lalu testing dengan ping ke arah Dorki `ping 10.25.0.2`
+
+### Gambar :
+
 ## NOMOR 5 Akses dari subnet Elena dan Fukuro hanya diperbolehkan pada pukul 15.01 hingga pukul 06.59 setiap harinya.Selain itu di reject
 ## NOMOR 6 Luffy ingin Guanhao disetting sehingga setiap request dari client yang mengakses DNS Server akan didistribusikan secara bergantian pada Jorge dan Maingate
 
