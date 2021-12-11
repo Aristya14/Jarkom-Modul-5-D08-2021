@@ -332,7 +332,84 @@ Lalu testing dengan ping ke arah Dorki `ping 10.25.0.2`
 ![6](./gambar/42.png)
 
 ## NOMOR 5 Akses dari subnet Elena dan Fukuro hanya diperbolehkan pada pukul 15.01 hingga pukul 06.59 setiap harinya.Selain itu di reject
+
+***Doriki***
+
+*Batas Akses Doriki Dari Elena*
+
+Masukkan command seperti di bawah ini:
+
+`iptables -A INPUT -s 10.25.2.0/23 -m time --timestart 15:01 --timestop 06:59 -j ACCEPT`
+
+`iptables -A INPUT -s 10.25.2.0/23 -j REJECT`
+
+Lalu testing dengan ping ke arah Dorki `ping 10.25.0.2`
+
+### Gambar :
+
+![image](https://user-images.githubusercontent.com/73290753/145673887-f9cb583b-1427-47b4-aa64-d9c74c94f17c.png)
+
+*Batas Akses Doriki Dari Fukurou*
+
+Masukkan command seperti di bawah ini:
+
+`iptables -A INPUT -s 10.25.1.0/24 -m time --timestart 15:01 --timestop 06:59 -j ACCEPT`
+
+`iptables -A INPUT -s 10.25.1.0/24 -j REJECT`
+
+Lalu testing dengan ping ke arah Dorki `ping 10.25.0.2`
+
+### Gambar :
+
+![image](https://user-images.githubusercontent.com/73290753/145673925-d5393b1e-d380-4b9d-9a89-0dc01d314fe1.png)
+
+Keterangan:
+- `-A INPUT` : Menggunakan chain INPUT 
+- `-m time` : Menggunakan rule time
+- `-timestart 15:01` : Mendefinisikan waktu mulai yaitu 15:00
+- `-timestop 06:59` : Mendefinisikan waktu berhenti yaitu 07.00
+- `-j ACCEPT` : Paket di-accept
+- `-j REJECT` : Paket ditolak
+
 ## NOMOR 6 Luffy ingin Guanhao disetting sehingga setiap request dari client yang mengakses DNS Server akan didistribusikan secara bergantian pada Jorge dan Maingate
+
+***Distribusikan Jorge dan Maingate***
+
+*Mengarahkan Elena  ke Maingate dan Jorge*
+
+Dengan command seperti di bawah ini:
+
+`iptables -A PREROUTING -t nat -p tcp -d 10.25.0.0/29 --dport 80 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination  10.25.0.10:80`
+
+`iptables -A PREROUTING -t nat -p tcp -d 10.25.0.0/29 --dport 80 -j DNAT --to-destination 10.25.0.11:80`
+
+`iptables -t nat -A POSTROUTING -p tcp -d 10.25.0.10 --dport 80 -j SNAT --to-source 10.25.0.0:80`
+
+`iptables -t nat -A POSTROUTING -p tcp -d 10.25.0.11 --dport 80 -j SNAT --to-source 10.25.0.0:80`
+
+Testing untuk nomor 6:
+
+1. Pada Guanhao, Jorge, Maingate dan Elena `install apt-get install netcat`
+
+2. Pada Jorge / Maingate ketikkan perintah:  `nc -l -p 80`
+
+3. Pada client Elena ketikkan perintah: `nc 10.25.0.0 80`
+
+4. Ketikkan sembarang pada client Elena, nanti akan muncul bergantian
+
+### Gambar :
+
+![image](https://user-images.githubusercontent.com/73290753/145674116-4e6b8028-ec01-4ec1-92ef-88c5aa9e43eb.png)
+
+![image](https://user-images.githubusercontent.com/73290753/145674118-9a681ae1-8861-44f0-a838-de8b3d657a4d.png)
+
+![image](https://user-images.githubusercontent.com/73290753/145674120-6e45fa2d-f775-4c9c-93f2-b300088de16a.png)
+
+![image](https://user-images.githubusercontent.com/73290753/145674129-6eac2b2b-6259-411e-b6b2-06f54d30e722.png)
+
+(Untuk Cek IPTables yang udah diassign)
+`iptables --list`
+`iptables -L -n -t nat`
 
 
 ## Kendala:
