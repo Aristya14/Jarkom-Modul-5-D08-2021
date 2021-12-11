@@ -232,13 +232,13 @@ di console lakukan command
 
 (source ambil dari ip a di foosha)
 
-Keterangan
-`-t nat`: Menggunakan tabel NAT karena akan mengubah alamat asal dari paket
-`-A POSTROUTING`: Menggunakan chain POSTROUTING karena mengubah asal paket setelah routing
-`-s 10.25.0.0/21`: Mendifinisikan alamat asal dari paket yaitu semua alamat IP dari subnet 10.25.0.0/21
-`-o eth0`: Paket keluar dari eth0 Foosha
-`-j SNAT`: Menggunakan target SNAT untuk mengubah source atau alamat asal dari paket
-`--to-s (ip eth0)`: Mendefinisikan IP source, di mana digunakan eth0 Foosha dengan rentang IP
+Keterangan:
+- `-t nat`: Menggunakan tabel NAT karena akan mengubah alamat asal dari paket
+- `-A POSTROUTING`: Menggunakan chain POSTROUTING karena mengubah asal paket setelah routing
+- `-s 10.25.0.0/21`: Mendifinisikan alamat asal dari paket yaitu semua alamat IP dari subnet 10.25.0.0/21
+- `-o eth0`: Paket keluar dari eth0 Foosha
+- `-j SNAT`: Menggunakan target SNAT untuk mengubah source atau alamat asal dari paket
+- `--to-s (ip eth0)`: Mendefinisikan IP source, di mana digunakan eth0 Foosha dengan rentang IP
 
 ![image](https://user-images.githubusercontent.com/72466039/145667016-3da0272d-3622-4eba-82e6-ed4a70ac85eb.png)
 ![image](https://user-images.githubusercontent.com/72466039/145667024-8e50bd0c-a2bb-4f1b-aba7-3edcd441cb1e.png)
@@ -248,12 +248,12 @@ Keterangan
 iptables -A FORWARD -d 10.25.0.0/29 -i eth0 -p tcp --dport 80 -j DROP
 
 Keterangan:
-`-A FORWARD`: Menggunakan chain FORWARD
-`-p tcp`: Mendefinisikan protokol yang digunakan, yaitu tcp
-`--dport 80`: Mendefinisikan port yang digunakan, yaitu 80 (HTTP)
-`-d 10.25.0.0/29`: Mendefinisikan alamat tujuan dari paket (DHCP dan DNS SERVER ) berada pada subnet 10.25.0.0/29
-`-i eth0`: Paket masuk dari eth0 Foosha
-`-j DROP`: Paket di-drop
+- `-A FORWARD`: Menggunakan chain FORWARD
+- `-p tcp`: Mendefinisikan protokol yang digunakan, yaitu tcp
+- `--dport 80`: Mendefinisikan port yang digunakan, yaitu 80 (HTTP)
+- `-d 10.25.0.0/29`: Mendefinisikan alamat tujuan dari paket (DHCP dan DNS SERVER ) berada pada subnet 10.25.0.0/29
+- `-i eth0`: Paket masuk dari eth0 Foosha
+- `-j DROP`: Paket di-drop
 
 **Testing Nomer 2**
 1. Install netcat di server Jipangu dan Doriki: apt-get install netcat
